@@ -13,8 +13,16 @@ export interface IUserDto {
 	city?: string;
 }
 
+export interface IOtpRequest {
+	phone: string
+}
 export interface IOtpResponse extends IBaseResponse {
 	retryDelay: number;
+}
+
+export interface ISignInRequest {
+	phone: string,
+	code: number
 }
 
 export interface ISignInResponse extends IBaseResponse {
@@ -22,6 +30,6 @@ export interface ISignInResponse extends IBaseResponse {
 	token: string;
 }
 
-export interface IGetUserSession extends IBaseResponse {
+export interface IGetUserSessionResponse extends IBaseResponse {
 	user: IUserDto;
 }
