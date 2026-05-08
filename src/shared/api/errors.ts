@@ -24,9 +24,22 @@ export class ApiError extends Error {
 		this.status = status;
 		this.details = details;
 	}
-}
+};
 
-export function throwWhenBusinessError(data: IBaseResponse): void {
+function isBaseResponse(data: unknown): data is IBaseResponse {
+	return(
+		typeof data === 'object' &&
+		data !== null &&
+		'success' in data &&
+		typeof (data as IBaseResponse).success === 'boolean'
+	);
+};
+
+export function throwWhenBusinessError(data: unknown): void {
+	if(!isBaseResponse(data)) {
+		return;
+	}
+
 	if (!data.success) {
 		throw new ApiError(data.reason ?? 'Ваш запрос был отклонен на сервере', 'BUSINESS_ERROR', undefined, data)
 	}
