@@ -1,22 +1,32 @@
 import { AuthPage } from "@/pages/auth";
 import { ProfilePage } from "@/pages/profile";
 import { Navigate, type RouteObject } from "react-router-dom";
+import { PublicRoute } from "../ui/public-route";
+import { ProtectedRoute } from "../ui/protected-route";
 
 export const routes: RouteObject[] = [
     {
         path: '/',
-        element: <Navigate to={'/auth'} replace/>
+        element: <Navigate to='/auth?step=phone' replace/>
     },
     {
         path: '/auth',
-        element: <AuthPage/>
+        element: (
+            <PublicRoute>
+                <AuthPage />
+            </PublicRoute>
+        )
     },
     {
         path: '/profile',
-        element: <ProfilePage/>
+        element: (
+            <ProtectedRoute>
+                <ProfilePage />
+            </ProtectedRoute>
+        )
     },
     {
         path: '*',
-        element: <Navigate to={'/auth'} replace/>,
+        element: <Navigate to='/auth?step=phone' replace/>,
     },
 ];
