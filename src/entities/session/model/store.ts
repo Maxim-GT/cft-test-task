@@ -14,6 +14,9 @@ interface ISessionState {
 	error: string | null;
 	isLoading: boolean;
 
+	isHydrated: boolean;
+	isLoadingSession: boolean;
+	isAuthReady: boolean
 
 	requestOtp: (phone: string) => Promise<boolean>;
 	signIn: (code: number) => Promise<boolean>;
@@ -21,6 +24,8 @@ interface ISessionState {
 	logout: () => void;
 	clearError: () => void;
 	getMsUntilRetry: () => number;
+	setIsHydrated: (value: boolean) => void;
+	initializeAuth: () => Promise<void>;
 }
 
 export const useSessionStore = create<ISessionState>()(
@@ -33,6 +38,10 @@ export const useSessionStore = create<ISessionState>()(
 			retryAt: null,
 			isLoading: false,
 			error: null,
+			
+			isHydrated: false,
+			isLoadingSession: false,
+			isAuthReady: false,
 
 			requestOtp: async (phone) => {
 				const msUntilRetry = get().getMsUntilRetry();
@@ -176,16 +185,50 @@ export const useSessionStore = create<ISessionState>()(
 					return 0;
 				}
 				return Math.max(0, retryAt - Date.now());
-			} 
+			},
+			initializeAuth: async () => {
+				if (get().isLoadingSession || get().isAuthReady) {
+					return;
+				}
+
+				set({isLoadingSession: true});
+
+				try {
+					const token = get().token;
+
+					if (!token) {
+						set({ user: null, status: 'anonymous' });
+            			return;
+					}
+
+					await get().getSession();
+				} finally {
+					set({
+						isLoadingSession: false,
+						isAuthReady: true,
+					})
+				}
+			},
+
+			setIsHydrated: (value) => set({
+				isHydrated: value
+			})
 			
 		}),
 		{
 			name: 'session-store',
 			partialize: (state) => ({
-				user: state.user,
-				token: state.token,
-				status: state.token ? 'authenticated' : 'anonymous',
+				user: state?.user,
+				token: state?.token,
+				status: state?.token ? 'authenticated' : 'anonymous',
 			}),
+			onRehydrateStorage: () => (state, error) => {
+				state?.setIsHydrated(true);	
+							
+				if (error) {
+					state?.setIsHydrated(true);	
+				};
+			},
 		}
 	)
 )

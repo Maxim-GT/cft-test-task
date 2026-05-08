@@ -10,8 +10,8 @@ export const ProtectedRoute = ({children}: IProtectedRouteProps ): JSX.Element =
     const status = useSessionStore((state) => state.status);
 
     if (status !== 'authenticated') {
-        return <Navigate to='/auth?step=phone'/>
+        return <Navigate to='/auth?step=phone' replace/>
     }
-    
+
     return children;
 }
