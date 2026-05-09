@@ -77,7 +77,7 @@ export const useSessionStore = create<ISessionState>()(
 				} catch {
 					set({
 						isLoading: false,
-						error: 'Возникла ошибка во время отправки кода',
+						error: 'Возникла ошибка во время отправки кода, пожалуйста, попробуйте позже',
 					});
 					return false;
 				}
