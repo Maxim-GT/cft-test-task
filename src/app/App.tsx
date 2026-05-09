@@ -1,6 +1,7 @@
 import { useEffect, type JSX } from "react";
 import { RouterProvider } from "@/app/providers/router";
 import { useSessionStore } from "@/entities/session";
+import { ToastProvider } from "./providers/toast-provider";
 
 function App(): JSX.Element {
   const isHydrated = useSessionStore((state) => state.isHydrated);
@@ -19,7 +20,13 @@ function App(): JSX.Element {
     return <main>Загрузка...</main>
   }
   
-  return <RouterProvider />;
+  return (
+    <>
+      <RouterProvider />
+      <ToastProvider/>
+    </>
+      
+  ) 
 
 }
 
