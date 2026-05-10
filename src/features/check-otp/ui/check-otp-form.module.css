@@ -1,0 +1,13 @@
+.actions {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.helperText {
+	margin-top: var(--space-40);
+}
+
+.secondaryButton {
+	margin-top: var(--space-24);
+}

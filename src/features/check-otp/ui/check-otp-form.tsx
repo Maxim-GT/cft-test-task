@@ -3,6 +3,7 @@ import type { CheckOtpFormProps } from '../model/types';
 import { useCheckOtp } from '../model/use-check-otp';
 import { Button, HelperText, Input } from '@/shared/ui';
 import { declineRuSeconds } from '../lib/decline-ru-secods';
+import styles from './check-otp-form.module.css';
 
 export function CheckOtpForm(props: CheckOtpFormProps): JSX.Element {
 	const { form, onSubmit, onResend, isLoading, secondsLeft, canResend } =
@@ -32,19 +33,21 @@ export function CheckOtpForm(props: CheckOtpFormProps): JSX.Element {
 				maxLength={6}
 			/>
 
-			<Button type="submit" disabled={isLoading}>
-				Войти
-			</Button>
-			{!canResend ? (
-				<HelperText size="sm">
-					Запросить код повторно можно через{' '}
-					{` ${secondsLeft} ${declineRuSeconds(secondsLeft, ['секунду', 'cекунды', 'секунд'])}`}
-				</HelperText>
-			) : (
-				<Button variant="secondary" onClick={onResend} type="button">
-					Запросить код ещё раз
+			<div className={styles.actions}>
+				<Button type="submit" disabled={isLoading}>
+					Войти
 				</Button>
-			)}
+				{!canResend ? (
+					<HelperText size="sm" className={styles.helperText}>
+						Запросить код повторно можно через{' '}
+						{` ${secondsLeft} ${declineRuSeconds(secondsLeft, ['секунду', 'cекунды', 'секунд'])}`}
+					</HelperText>
+				) : (
+					<Button variant="secondary" onClick={onResend} type="button" className={styles.secondaryButton}>
+						Запросить код ещё раз
+					</Button>
+				)}
+			</div>
 		</form>
 	);
 }
