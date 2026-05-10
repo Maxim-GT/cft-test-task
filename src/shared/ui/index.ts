@@ -9,3 +9,6 @@ export type { HelperTextProps } from './HelperText';
 
 export { Title } from './Title';
 export type { TitleProps } from './Title';
+
+export { Loader } from './Loader';
+export type { ILoaderProps } from './Loader';
