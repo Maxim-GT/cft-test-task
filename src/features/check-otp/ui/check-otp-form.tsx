@@ -1,7 +1,7 @@
 import { type ChangeEvent, type JSX } from 'react';
 import type { CheckOtpFormProps } from '../model/types';
 import { useCheckOtp } from '../model/use-check-otp';
-import { Button, HelperText, Input } from '@/shared/ui';
+import { Button, HelperText, Input, Loader } from '@/shared/ui';
 import { declineRuSeconds } from '../lib/decline-ru-secods';
 import styles from './check-otp-form.module.css';
 
@@ -35,7 +35,7 @@ export function CheckOtpForm(props: CheckOtpFormProps): JSX.Element {
 
 			<div className={styles.actions}>
 				<Button type="submit" disabled={isLoading}>
-					Войти
+					{isLoading ? <Loader size='sm' /> : 'Войти'}
 				</Button>
 				{!canResend ? (
 					<HelperText size="sm" className={styles.helperText}>

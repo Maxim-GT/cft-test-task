@@ -3,6 +3,7 @@ import { AuthWidget } from '@/widgets/auth-widget';
 import type { JSX } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import styles from './auth-page.module.css';
+import { Loader } from '@/shared/ui';
 
 
 type AuthStep = 'phone' | 'code';
@@ -20,7 +21,7 @@ export const AuthPage = (): JSX.Element => {
 	const currentStep: AuthStep = rawStep === 'code' ? 'code' : 'phone';
 
 	if (!isHydrated || !isAuthReady) {
-		return <main>Загрузка...</main>;
+		return <main><Loader size='lg' /></main>;
 	}
 
 	if (currentStep === 'code' && !isCodeAllowed) {
