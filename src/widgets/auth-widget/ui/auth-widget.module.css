@@ -19,3 +19,9 @@
 .formWrapper form button:first-of-type {
 	margin-top: var(--space-40);
 }
+
+.displayInput {
+	outline: none;
+	pointer-events: none;
+
+}

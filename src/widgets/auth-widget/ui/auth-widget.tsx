@@ -56,8 +56,8 @@ export function AuthWidget(): JSX.Element {
 							value={phoneForOtp}
 							readOnly
 							className={styles.displayInput}
+							tabIndex={-1}
 						/>
-
 						<CheckOtpForm
 							displayPhone={displayPhone}
 						/>
