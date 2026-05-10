@@ -1,9 +1,9 @@
 import type { JSX } from 'react';
-import { routes } from "@/app/routes";
-import { createBrowserRouter, RouterProvider as ReactRouterProvider } from "react-router-dom";
+import { routes } from '@/app/routes';
+import { createBrowserRouter, RouterProvider as ReactRouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter(routes);
 
 export const RouterProvider = (): JSX.Element => {
-    return <ReactRouterProvider router={router}/>
-}
+    return <ReactRouterProvider router={router} />;
+};

@@ -1,9 +1,9 @@
 export type {
-	IBaseResponse,
-	IUserDto,
-	IOtpRequest,
-	IOtpResponse,
-	ISignInRequest,
-	ISignInResponse,
-	IGetUserSessionResponse,
+    IBaseResponse,
+    IUserDto,
+    IOtpRequest,
+    IOtpResponse,
+    ISignInRequest,
+    ISignInResponse,
+    IGetUserSessionResponse,
 } from './types';

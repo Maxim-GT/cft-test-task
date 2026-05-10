@@ -1,1 +1,1 @@
-export * from "./request-otp";
+export * from './request-otp';

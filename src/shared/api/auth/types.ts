@@ -1,35 +1,35 @@
 export interface IBaseResponse {
-	success: boolean;
-	reason?: string;
+    success: boolean;
+    reason?: string;
 }
 
 export interface IUserDto {
-	_id: string;
-	phone: string;
-	firstname?: string;
-	middlename?: string;
-	lastname?: string;
-	email?: string;
-	city?: string;
+    _id: string;
+    phone: string;
+    firstname?: string;
+    middlename?: string;
+    lastname?: string;
+    email?: string;
+    city?: string;
 }
 
 export interface IOtpRequest {
-	phone: string
+    phone: string;
 }
 export interface IOtpResponse extends IBaseResponse {
-	retryDelay: number;
+    retryDelay: number;
 }
 
 export interface ISignInRequest {
-	phone: string,
-	code: number
+    phone: string;
+    code: number;
 }
 
 export interface ISignInResponse extends IBaseResponse {
-	user: IUserDto;
-	token: string;
+    user: IUserDto;
+    token: string;
 }
 
 export interface IGetUserSessionResponse extends IBaseResponse {
-	user: IUserDto;
+    user: IUserDto;
 }

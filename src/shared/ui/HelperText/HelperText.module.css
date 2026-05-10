@@ -1,17 +1,17 @@
 .text {
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
 }
 
 .md {
-  font-size: var(--font-size-md);
-  line-height: 24px;
-  color: var(--text-primary);
+    font-size: var(--font-size-md);
+    line-height: 24px;
+    color: var(--text-primary);
 }
 
 .sm {
-  font-size: var(--font-size-sm);
-  line-height: 20px;
-  color: var(--text-tertiary);
+    font-size: var(--font-size-sm);
+    line-height: 20px;
+    color: var(--text-tertiary);
 }

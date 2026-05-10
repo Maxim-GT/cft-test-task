@@ -1,4 +1,4 @@
-import type { RequestOtpFormData, RequestOtpApiData} from "./schema";
+import type { RequestOtpFormData, RequestOtpApiData } from './schema';
 
 export interface RequestOtpFormProps {
     initialPhone?: RequestOtpFormData['phone'];

@@ -1,8 +1,8 @@
-import { useSessionStore } from "@/entities/session";
-import type { RequestOtpFormProps } from "./types";
+import { useSessionStore } from '@/entities/session';
+import type { RequestOtpFormProps } from './types';
 import { useForm } from 'react-hook-form';
-import { requestOtpSchema, type RequestOtpFormData } from "./schema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { requestOtpSchema, type RequestOtpFormData } from './schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export function useRequestOtp(props: RequestOtpFormProps) {
     const requestOtp = useSessionStore((s) => s.requestOtp);
@@ -15,14 +15,14 @@ export function useRequestOtp(props: RequestOtpFormProps) {
 
     const form = useForm<RequestOtpFormData>({
         resolver: zodResolver(requestOtpSchema),
-        defaultValues: {phone: props.initialPhone ?? ''},
-        mode: 'onSubmit'
+        defaultValues: { phone: props.initialPhone ?? '' },
+        mode: 'onSubmit',
     });
 
     const onSubmit = form.handleSubmit(async (value) => {
         const isOk = await requestOtp(value.phone);
 
-        if(!isOk) {
+        if (!isOk) {
             return;
         }
 
@@ -37,6 +37,6 @@ export function useRequestOtp(props: RequestOtpFormProps) {
         isLoading,
         error,
         secondsLeft,
-        canResend
-    }
+        canResend,
+    };
 }
