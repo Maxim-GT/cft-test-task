@@ -1,8 +1,9 @@
 import { useSessionStore } from '@/entities/session';
 import { AuthWidget } from '@/widgets/auth-widget';
-
 import type { JSX } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
+import styles from './auth-page.module.css';
+
 
 type AuthStep = 'phone' | 'code';
 
@@ -31,8 +32,10 @@ export const AuthPage = (): JSX.Element => {
 	}
 
 	return (
-		<main>
-			< AuthWidget />
+		<main className={styles.page}>
+			<div className={styles.container}>
+				< AuthWidget />
+			</div>
 		</main>
 	);
 };

@@ -1,0 +1,10 @@
+.page {
+	width: 100%;
+	padding-top: 96px;
+}
+
+.container {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding-left: 240px;
+}
