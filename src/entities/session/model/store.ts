@@ -1,6 +1,6 @@
 import type { IUserDto } from '@/shared/api/auth/types';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { authService } from '../api/authService';
 
 type AuthStatus = 'anonymous' | 'otp_sent' | 'authenticated';
@@ -38,7 +38,7 @@ export const useSessionStore = create<ISessionState>()(
 			retryAt: null,
 			isLoading: false,
 			error: null,
-			
+
 			isHydrated: false,
 			isLoadingSession: false,
 			isAuthReady: false,
@@ -53,10 +53,10 @@ export const useSessionStore = create<ISessionState>()(
 					return false;
 				}
 
-				set({isLoading: true, error: null});
-				
+				set({ isLoading: true, error: null });
+
 				try {
-					const data = await authService.sendOtp({phone});
+					const data = await authService.sendOtp({ phone });
 
 					if (!data.success) {
 						set({
@@ -89,10 +89,10 @@ export const useSessionStore = create<ISessionState>()(
 					return false;
 				}
 
-				set({isLoading: true, error: null});
+				set({ isLoading: true, error: null });
 
 				try {
-					const data = await authService.signIn({phone, code});
+					const data = await authService.signIn({ phone, code });
 
 					if (!data.success) {
 						set({
@@ -161,7 +161,7 @@ export const useSessionStore = create<ISessionState>()(
 					});
 					return false;
 				}
-				
+
 			},
 			logout: () => {
 				set({
@@ -191,14 +191,14 @@ export const useSessionStore = create<ISessionState>()(
 					return;
 				}
 
-				set({isLoadingSession: true});
+				set({ isLoadingSession: true });
 
 				try {
-					const token = get().token;
+					const { token, status } = get();
 
 					if (!token) {
-						set({ user: null, status: 'anonymous' });
-            			return;
+						set({ user: null, status: status === 'otp_sent' ? 'otp_sent' : 'anonymous' });
+						return;
 					}
 
 					await get().getSession();
@@ -213,20 +213,21 @@ export const useSessionStore = create<ISessionState>()(
 			setIsHydrated: (value) => set({
 				isHydrated: value
 			})
-			
+
 		}),
 		{
 			name: 'session-store',
+			storage: createJSONStorage(() => sessionStorage),
 			partialize: (state) => ({
 				user: state?.user,
 				token: state?.token,
-				status: state?.token ? 'authenticated' : 'anonymous',
+				status: state?.status,
+				phone: state.phone,
+				retryAt: state.retryAt,
 			}),
-			onRehydrateStorage: () => (state, error) => {
-				state?.setIsHydrated(true);	
-							
-				if (error) {
-					state?.setIsHydrated(true);	
+			onRehydrateStorage: () => (state) => {
+				if (state) {
+					state?.setIsHydrated(true);
 				};
 			},
 		}
