@@ -4,7 +4,7 @@ import { useSessionStore } from '@/entities/session';
 import { ToastProvider } from './providers/toast-provider';
 import { Loader } from '@/shared/ui';
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
 	const isHydrated = useSessionStore((state) => state.isHydrated);
 	const isLoadingSession = useSessionStore((state) => state.isLoadingSession);
 	const isAuthReady = useSessionStore((state) => state.isAuthReady);
