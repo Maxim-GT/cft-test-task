@@ -31,6 +31,7 @@ export function RequestOtpForm(props: RequestOtpFormProps): JSX.Element {
 						onChange={(e) => {
 							if (status === 'otp_sent') {
 								resetPhoneState();
+								form.reset({ phone: '' });
 							}
 							field.onChange(phoneToRuFormat(e.target.value))
 						}}
