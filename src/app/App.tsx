@@ -4,6 +4,7 @@ import { useSessionStore } from '@/entities/session';
 
 import { Loader } from '@/shared/ui';
 import { ToastProvider } from './providers/toast';
+import { ReactQueryProvider } from './providers/react-query';
 
 export function App(): JSX.Element {
 	const isHydrated = useSessionStore((state) => state.isHydrated);
@@ -23,10 +24,10 @@ export function App(): JSX.Element {
 	}
 
 	return (
-		<>
+		<ReactQueryProvider>
 			<RouterProvider />
 			<ToastProvider />
-		</>
+		</ReactQueryProvider>
 	);
 }
 
