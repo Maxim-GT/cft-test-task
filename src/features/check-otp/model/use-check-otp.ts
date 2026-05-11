@@ -1,13 +1,12 @@
 import { useSessionStore } from '@/entities/session';
-import type { CheckOtpFormProps } from './types';
+import type { ICheckOtpFormProps } from './types';
 import { useForm } from 'react-hook-form';
 import { checkOtpSchema, type CheckOtpApiData, type CheckOtpFormData } from './schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 
-export function useCheckOtp(props: CheckOtpFormProps) {
+export function useCheckOtp(props: ICheckOtpFormProps) {
 	const signIn = useSessionStore((state) => state.signIn);
-	const logout = useSessionStore((s) => s.logout);
 	const requestOtp = useSessionStore((s) => s.requestOtp);
 	const isLoading = useSessionStore((s) => s.isLoading);
 	const phone = useSessionStore((state) => state.phone);
@@ -16,6 +15,7 @@ export function useCheckOtp(props: CheckOtpFormProps) {
 	const retryAt = useSessionStore((state) => state.retryAt);
 	const secondsLeft = Math.ceil(msUntilRetry / 1000);
 	const canResend = msUntilRetry === 0 && !!phone;
+	const clearError = useSessionStore((s) => s.clearError);
 
 	const [, setTick] = useState(0);
 
@@ -49,7 +49,8 @@ export function useCheckOtp(props: CheckOtpFormProps) {
 			form.setError('code', {
 				type: 'server',
 				message: serverError || 'Неверный код'
-			})
+			});
+			clearError();
 			return;
 		}
 
@@ -68,15 +69,9 @@ export function useCheckOtp(props: CheckOtpFormProps) {
 		}
 	};
 
-	const onBack = () => {
-		logout();
-		props.onBack?.();
-	};
-
 	return {
 		form,
 		onSubmit,
-		onBack,
 		onResend,
 		isLoading,
 		secondsLeft,

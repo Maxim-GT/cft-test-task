@@ -4,7 +4,7 @@ import { useRequestOtp } from '../model/use-request-otp';
 import { Controller } from 'react-hook-form';
 import { useEffect, type JSX } from 'react';
 import { toast } from 'sonner';
-import { phoneToRuFormat } from '../lib/phone-to-ru-format';
+import { phoneToRuFormat } from '@/shared/lib';
 
 export function RequestOtpForm(props: RequestOtpFormProps): JSX.Element {
 	const { form, onSubmit, isLoading, error } = useRequestOtp(props);

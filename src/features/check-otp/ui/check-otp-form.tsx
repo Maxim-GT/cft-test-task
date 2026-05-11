@@ -1,11 +1,11 @@
 import { type ChangeEvent, type JSX } from 'react';
-import type { CheckOtpFormProps } from '../model/types';
+import type { ICheckOtpFormProps } from '../model/types';
 import { useCheckOtp } from '../model/use-check-otp';
 import { Button, HelperText, Input, Loader } from '@/shared/ui';
 import { declineRuSeconds } from '../lib/decline-ru-secods';
 import styles from './check-otp-form.module.css';
 
-export function CheckOtpForm(props: CheckOtpFormProps): JSX.Element {
+export function CheckOtpForm(props: ICheckOtpFormProps): JSX.Element {
 	const { form, onSubmit, onResend, isLoading, secondsLeft, canResend } =
 		useCheckOtp(props);
 

@@ -1,12 +1,9 @@
 import { useSessionStore } from '@/entities/session';
-import { AuthWidget } from '@/widgets/auth-widget';
+import { AuthWidget, type AuthStep } from '@/widgets/auth-widget';
 import type { JSX } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import styles from './auth-page.module.css';
 import { Loader } from '@/shared/ui';
-
-
-type AuthStep = 'phone' | 'code';
 
 export const AuthPage = (): JSX.Element => {
 	const phone = useSessionStore((state) => state.phone);
@@ -28,14 +25,10 @@ export const AuthPage = (): JSX.Element => {
 		return <Navigate to="/auth?step=phone" replace />;
 	}
 
-	if (currentStep === 'phone' && isCodeAllowed) {
-		return <Navigate to="/auth?step=code" replace />;
-	}
-
 	return (
 		<main className={styles.page}>
 			<div className={styles.container}>
-				< AuthWidget />
+				< AuthWidget step={currentStep} />
 			</div>
 		</main>
 	);

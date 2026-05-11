@@ -4,13 +4,15 @@ import { useMemo, useState, type JSX } from 'react';
 import styles from './auth-widget.module.css'
 import { RequestOtpForm } from '@/features';
 import { CheckOtpForm } from '@/features/check-otp';
-import { phoneToRuFormat } from '@/features/request-otp/lib/phone-to-ru-format';
+import { useNavigate } from 'react-router-dom';
+import type { AuthWidgetProps } from '../model/types';
+import { phoneToRuFormat } from '@/shared/lib';
 
-export function AuthWidget(): JSX.Element {
-	const status = useSessionStore((s) => s.status);
+export function AuthWidget({ step }: AuthWidgetProps): JSX.Element {
+	const navigate = useNavigate();
 	const phoneFromSore = useSessionStore((s) => s.phone);
 	const [displayPhone, setDisplayPhone] = useState<string>('');
-	const isOtpStep = status === 'otp_sent';
+	const isOtpStep = step === 'code';
 
 	const phoneForOtp = useMemo(() => {
 		if (displayPhone) {
@@ -47,8 +49,9 @@ export function AuthWidget(): JSX.Element {
 			<div className={styles.formWrapper}>
 				{!isOtpStep ? (
 					<RequestOtpForm
-						initialPhone={phoneFromSore || ''}
+						initialPhone={phoneToRuFormat(phoneFromSore) || ''}
 						onSentDisplayPhone={(formatted) => setDisplayPhone(formatted)}
+						onSuccess={() => navigate('/auth?step=code')}
 					/>
 				) : (
 					<>
@@ -62,7 +65,6 @@ export function AuthWidget(): JSX.Element {
 							displayPhone={displayPhone}
 						/>
 					</>
-
 				)}
 			</div>
 		</section>
