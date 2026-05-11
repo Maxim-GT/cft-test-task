@@ -2,7 +2,7 @@ import { useEffect, type JSX } from 'react';
 import { RouterProvider } from '@/app/providers/router';
 import { useSessionStore } from '@/entities/session';
 
-import { Loader } from '@/shared/ui';
+import { AppErrorBoundary, Loader } from '@/shared/ui';
 import { ToastProvider } from './providers/toast';
 import { ReactQueryProvider } from './providers/react-query';
 
@@ -24,10 +24,12 @@ export function App(): JSX.Element {
 	}
 
 	return (
-		<ReactQueryProvider>
-			<RouterProvider />
-			<ToastProvider />
-		</ReactQueryProvider>
+		<AppErrorBoundary>
+			<ReactQueryProvider>
+				<RouterProvider />
+				<ToastProvider />
+			</ReactQueryProvider>
+		</AppErrorBoundary >
 	);
 }
 

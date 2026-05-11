@@ -12,3 +12,5 @@ export type { TitleProps } from './Title';
 
 export { Loader } from './Loader';
 export type { ILoaderProps } from './Loader';
+
+export { AppErrorBoundary } from './AppErrorBoundary';
