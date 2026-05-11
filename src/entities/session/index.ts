@@ -1,2 +1,2 @@
-export { authService } from './api/index';
-export { useSessionStore } from './model/index';
+export * from './model';
+export * from './api';
