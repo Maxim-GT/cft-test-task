@@ -7,12 +7,14 @@ import { CheckOtpForm } from '@/features/check-otp';
 import { useNavigate } from 'react-router-dom';
 import type { AuthWidgetProps } from '../model/types';
 import { phoneToRuFormat } from '@/shared/lib';
+import { toast } from 'sonner';
 
 export function AuthWidget({ step }: AuthWidgetProps): JSX.Element {
 	const navigate = useNavigate();
 	const phoneFromSore = useSessionStore((s) => s.phone);
 	const [displayPhone, setDisplayPhone] = useState<string>('');
 	const isOtpStep = step === 'code';
+
 
 	const phoneForOtp = useMemo(() => {
 		if (displayPhone) {
@@ -63,6 +65,10 @@ export function AuthWidget({ step }: AuthWidgetProps): JSX.Element {
 						/>
 						<CheckOtpForm
 							displayPhone={displayPhone}
+							onSuccess={() => {
+								toast.success('Вы успешно авторизованы');
+								void navigate('/profile');
+							}}
 						/>
 					</>
 				)}
