@@ -1,8 +1,9 @@
 import { useEffect, type JSX } from 'react';
 import { RouterProvider } from '@/app/providers/router';
 import { useSessionStore } from '@/entities/session';
-import { ToastProvider } from './providers/toast-provider';
+
 import { Loader } from '@/shared/ui';
+import { ToastProvider } from './providers/toast';
 
 export function App(): JSX.Element {
 	const isHydrated = useSessionStore((state) => state.isHydrated);
