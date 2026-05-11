@@ -1,4 +1,8 @@
-export function phoneToRuFormat(number: string): string {
+export function phoneToRuFormat(number?: string | null): string {
+    if (!number) {
+        return '';
+    }
+
     const digits = number.replace(/\D/g, '');
 
     if (!digits) {
