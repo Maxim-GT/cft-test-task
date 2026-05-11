@@ -27,6 +27,7 @@ interface ISessionState {
 	getMsUntilRetry: () => number;
 	setIsHydrated: (value: boolean) => void;
 	initializeAuth: () => Promise<void>;
+	resetPhoneState: () => void;
 }
 
 export const useSessionStore = create<ISessionState>()(
@@ -218,6 +219,14 @@ export const useSessionStore = create<ISessionState>()(
 				set({
 					isHydrated: value,
 				}),
+			resetPhoneState: () => {
+				set({
+					status: 'anonymous',
+					phone: null,
+					retryAt: null,
+					error: null
+				})
+			}
 		}),
 		{
 			name: 'session-store',
