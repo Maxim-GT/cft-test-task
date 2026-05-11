@@ -46,8 +46,9 @@ export const useSessionStore = create<ISessionState>()(
 
 			requestOtp: async (phone) => {
 				const msUntilRetry = get().getMsUntilRetry();
+				const currentPhone = get().phone;
 
-				if (msUntilRetry > 0) {
+				if (msUntilRetry > 0 && phone === currentPhone) {
 					set({
 						error: `Повторная отправка доступна через ${Math.ceil(msUntilRetry / 1000)} сек.`,
 					});
