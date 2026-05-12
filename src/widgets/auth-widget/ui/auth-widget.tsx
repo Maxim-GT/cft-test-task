@@ -62,6 +62,7 @@ export function AuthWidget({ step }: AuthWidgetProps): JSX.Element {
 							readOnly
 							className={styles.displayInput}
 							tabIndex={-1}
+							aria-label="Номер телефона, на который отправлен код"
 						/>
 						<CheckOtpForm
 							displayPhone={displayPhone}

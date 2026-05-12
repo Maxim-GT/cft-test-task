@@ -27,6 +27,7 @@ export function RequestOtpForm(props: RequestOtpFormProps): JSX.Element {
 				name="phone"
 				render={({ field }) => (
 					<Input
+						aria-label="Номер телефона для входа"
 						value={field.value ?? ''}
 						onChange={(e) => {
 							if (status === 'otp_sent') {
@@ -43,8 +44,8 @@ export function RequestOtpForm(props: RequestOtpFormProps): JSX.Element {
 				)}
 			/>
 
-			<Button type="submit" disabled={isLoading}>
-				{isLoading ? <Loader size='sm' /> : 'Продолжить'}
+			<Button type="submit" disabled={isLoading} aria-label={isLoading ? 'Отправка кода, подождите' : 'Запросить код'}>
+				{isLoading ? <Loader size="sm" aria-hidden /> : 'Продолжить'}
 			</Button>
 		</form>
 	);

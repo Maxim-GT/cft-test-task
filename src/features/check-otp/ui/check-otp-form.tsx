@@ -14,6 +14,7 @@ export function CheckOtpForm(props: ICheckOtpFormProps): JSX.Element {
 	return (
 		<form onSubmit={onSubmit} noValidate>
 			<Input
+				aria-label="Проверочный код из сообщения"
 				{...form.register('code', {
 					onChange: (e: ChangeEvent<HTMLInputElement>) => {
 						const value = e.target.value;
@@ -34,8 +35,8 @@ export function CheckOtpForm(props: ICheckOtpFormProps): JSX.Element {
 			/>
 
 			<div className={styles.actions}>
-				<Button type="submit" disabled={isLoading}>
-					{isLoading ? <Loader size='sm' /> : 'Войти'}
+				<Button type="submit" disabled={isLoading} aria-label={isLoading ? 'Выполняется вход, подождите' : 'Войти'}>
+					{isLoading ? <Loader size="sm" aria-hidden /> : 'Войти'}
 				</Button>
 				{!canResend ? (
 					<HelperText size="sm" className={styles.helperText}>
@@ -43,7 +44,7 @@ export function CheckOtpForm(props: ICheckOtpFormProps): JSX.Element {
 						{` ${secondsLeft} ${declineRuSeconds(secondsLeft, ['секунду', 'cекунды', 'секунд'])}`}
 					</HelperText>
 				) : (
-					<Button variant="secondary" onClick={onResend} type="button" className={styles.secondaryButton}>
+					<Button variant="secondary" onClick={onResend} type="button" className={styles.secondaryButton} aria-label="Запросить код еще раз">
 						Запросить код ещё раз
 					</Button>
 				)}
