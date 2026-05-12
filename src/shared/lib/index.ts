@@ -1,0 +1,1 @@
+export { phoneToRuFormat } from './phone-to-ru-format';
