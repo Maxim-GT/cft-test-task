@@ -29,6 +29,13 @@ apiClient.interceptors.response.use(
         return response;
     },
     function (error) {
-        return Promise.reject(normalizeApiError(error));
+        const apiError = normalizeApiError(error);
+        const { token, logout } = useSessionStore.getState();
+
+        if (apiError.status === 401 && token) {
+            logout();
+        }
+
+        return Promise.reject(apiError);
     },
 );

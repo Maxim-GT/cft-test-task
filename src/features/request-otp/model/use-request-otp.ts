@@ -28,19 +28,12 @@ export function useRequestOtp(props: RequestOtpFormProps) {
 			props.onSuccess?.();
 		} catch (error) {
 			if (error instanceof ApiError) {
-				if (error.code === 'NETWORK_ERROR') {
-					toast.error(error.message);
+				if (error.code === 'BUSINESS_ERROR') {
 					return;
 				}
-
-				form.setError('phone', {
-					type: 'server',
-					message: error.message,
-				});
-
+				toast.error(error.message);
 				return;
 			}
-
 			toast.error('Не удалось отправить код');
 		}
 	});
