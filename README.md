@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# Тестовое задание frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Клиентское SPA на React с авторизацией по телефону и OTP, получение профиля пользователя.
 
-Currently, two official plugins are available:
+## Стек технологий
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Слой | Технологии |
+|------|------------|
+| **UI** | React 19, React Router 7, CSS Modules |
+| **Формы и валидация** | React Hook Form, Zod, `@hookform/resolvers` |
+| **Данные и состояние** | TanStack Query (React Query), Zustand |
+| **HTTP** | Axios (инстанс с перехватчиками, Bearer-токен) |
+| **Уведомления и ошибки** | Sonner, `react-error-boundary` |
+| **Сборка и язык** | Vite 8, TypeScript 6 |
+| **Качество кода** | ESLint 10, Prettier 3 |
+| **Архитектура** | Feature-Sliced Design (`app` / `pages` / `widgets` / `features` / `entities` / `shared`) |
 
-## React Compiler
+## Запуск
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Установка зависимостей
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Переменные окружения
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Бэкенд задаётся через `VITE_API_URL` (без завершающего слэша; префикс `/api` к базе добавляется в коде).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Создайте в корне проекта файл `.env` (или `.env.local`):
+
+```env
+VITE_API_URL=https://example.com
 ```
+
+### 3. Режим разработки
+
+```bash
+npm run dev
+```
+
+### 4. Сборка и предпросмотр продакшн-сборки
+
+```bash
+npm run build
+npm run preview
+```
+
+### Полезные скрипты
+
+| Команда | Назначение |
+|---------|------------|
+| `npm run lint` | проверка ESLint |
+| `npm run lint:fix` | ESLint с автоисправлением |
+| `npm run format` | Prettier по проекту |
+| `npm run format:check` | проверка форматирования без записи |
+
