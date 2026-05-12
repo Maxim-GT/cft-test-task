@@ -5,9 +5,5 @@ import { createBrowserRouter, RouterProvider as ReactRouterProvider } from 'reac
 const router = createBrowserRouter(routes);
 
 export const RouterProvider = (): JSX.Element => {
-	return (
-		<ReactRouterProvider
-			router={router}
-		/>
-	);
+    return <ReactRouterProvider router={router} />;
 };

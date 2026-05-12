@@ -1,2 +1,2 @@
 export { authService } from './authService';
-export * from './hooks'
+export * from './hooks';

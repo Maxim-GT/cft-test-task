@@ -7,18 +7,20 @@ export const ProfilePage = (): JSX.Element => {
     const navigate = useNavigate();
     const logout = useSessionStore((state) => state.logout);
     const queryClient = useQueryClient();
-    
+
     const handleLogout = () => {
         logout();
         queryClient.removeQueries({ queryKey: ['auth'] });
         queryClient.removeQueries({ queryKey: ['profile'] });
-        void navigate('/auth?step=phone', {replace: true});
+        void navigate('/auth?step=phone', { replace: true });
     };
 
     return (
         <main>
             <h1>Страница профиля</h1>
-            <Button onClick={handleLogout} type='button' aria-label='Выйти' variant='primary'>Выйти</Button>
+            <Button onClick={handleLogout} type="button" aria-label="Выйти" variant="primary">
+                Выйти
+            </Button>
         </main>
     );
 };

@@ -7,32 +7,35 @@ import { AppInitializer } from './providers/app-initializer';
 import type { JSX } from 'react';
 
 export function App(): JSX.Element {
-	const isHydrated = useSessionStore((state) => state.isHydrated);
-	const isLoadingSession = useSessionStore((state) => state.isLoadingSession);
-	const isAuthReady = useSessionStore((state) => state.isAuthReady);
+    const isHydrated = useSessionStore((state) => state.isHydrated);
+    const isLoadingSession = useSessionStore((state) => state.isLoadingSession);
+    const isAuthReady = useSessionStore((state) => state.isAuthReady);
 
-	if (!isHydrated) {
-		return (
-			<main><Loader size='lg' /></main>
-		);
-	}
+    if (!isHydrated) {
+        return (
+            <main>
+                <Loader size="lg" />
+            </main>
+        );
+    }
 
-	return (
-		<AppErrorBoundary>
-			<ReactQueryProvider>
-				<AppInitializer />
-				{(!isAuthReady || isLoadingSession) ? (
-					<main><Loader size='lg' /></main>
-				) : (
-					<>
-						<RouterProvider />
-						<ToastProvider />
-					</>
-				)}
-
-			</ReactQueryProvider>
-		</AppErrorBoundary >
-	);
+    return (
+        <AppErrorBoundary>
+            <ReactQueryProvider>
+                <AppInitializer />
+                {!isAuthReady || isLoadingSession ? (
+                    <main>
+                        <Loader size="lg" />
+                    </main>
+                ) : (
+                    <>
+                        <RouterProvider />
+                        <ToastProvider />
+                    </>
+                )}
+            </ReactQueryProvider>
+        </AppErrorBoundary>
+    );
 }
 
 export default App;
