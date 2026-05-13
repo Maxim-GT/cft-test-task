@@ -11,9 +11,10 @@
 | **Данные и состояние** | TanStack Query (React Query), Zustand |
 | **HTTP** | Axios (инстанс с перехватчиками, Bearer-токен) |
 | **Уведомления и ошибки** | Sonner, `react-error-boundary` |
-| **Сборка и язык** | Vite 8, TypeScript 6 |
-| **Качество кода** | ESLint 10, Prettier 3 |
+| **Сборка и язык** | Vite, TypeScript |
+| **Качество кода** | ESLint, Prettier |
 | **Архитектура** | Feature-Sliced Design (`app` / `pages` / `widgets` / `features` / `entities` / `shared`) |
+| **Тестирование** | Vitest, React Testing Library, JSDom |
 
 ## Запуск
 
@@ -54,4 +55,5 @@ npm run preview
 | `npm run lint:fix` | ESLint с автоисправлением |
 | `npm run format` | Prettier по проекту |
 | `npm run format:check` | проверка форматирования без записи |
+| `npm run test:run` | прогон всех тестов |
 
