@@ -1,1 +1,1 @@
-export { phoneToRuFormat } from './phone-to-ru-format';
+export * from './formatters';
